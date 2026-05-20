@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Salama ✨</title>
+    <!-- AOS Animations CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Double Glow Custom Cursor Follower -->
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <!-- Background Space Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Floating Expandable Music Widget -->
+    <div class="music-widget">
+        <div class="music-wave paused" id="musicWave">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="music-info" id="musicInfo">Loading Track...</div>
+        <button class="music-btn" id="musicToggleBtn">▶</button>
+    </div>
+
+    <!-- ==========================================
+         PAGE 1: INTRO LANDING PAGE
+         ========================================== -->
+    <div id="intro-page" class="page active">
+        <div data-aos="zoom-in" data-aos-duration="1400">
+            <h1 class="glow-title">Happy Birthday Salama ✨</h1>
+            <div id="typewriter" class="subtitle"></div>
+            <button id="beginJourneyBtn" class="glow-btn">Begin the Journey 🎁</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PAGE 2: INTERACTIVE ENVELOPE & LETTER
+         ========================================== -->
+    <div id="letter-page" class="page">
+        <div data-aos="fade-up" data-aos-duration="1200" style="text-align: center; width: 100%;">
+            <h2 class="glow-title">A Message For You</h2>
+            <p class="subtitle">Click the wax seal to open a letter sent straight from the heart.</p>
+
+            <div class="envelope-container" id="envelopeContainer">
+                <div class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-left"></div>
+                    <div class="envelope-right"></div>
+                    <div class="envelope-bottom"></div>
+                    <div class="wax-seal" id="waxSeal">🎀</div>
+                    <div class="letter" id="letter">
+                        <h3>Dear Salama,</h3>
+                        <p>I know you felt a bit down because your friends are away and you didn't have anyone close by
+                            to celebrate your birthday. It broke my heart a little to think of you feeling lonely today,
+                            so I wanted to create this small surprise just for you.</p>
+                        <p>I know we might not be the closest yet, but I really wanted to do something sweet and
+                            personal to make your birthday this year feel a little extra special and bright. You deserve
+                            to feel celebrated and cherished, always. ✨</p>
+                        <p style="text-align: right; margin-top: 1.5rem; font-style: italic;">With warmth & care,</p>
+                        <p style="text-align: right; font-weight: bold;">Your Friend , Taher</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="toJarBtn" class="glow-btn"
+                style="display: none; opacity: 0; transform: translateY(20px); margin: 2rem auto 0 auto;">Next Surprise
+                🌸</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PAGE 3: THE JAR OF SMILES COMPLIMENTS
+         ========================================== -->
+    <div id="jar-page" class="page">
+        <div data-aos="fade-up" data-aos-duration="1200" style="text-align: center; width: 100%;">
+            <h2 class="glow-title">The Jar of Smiles</h2>
+            <p class="subtitle">Tap the jar to release glowing notes of warmth and appreciation.</p>
+
+            <div class="jar-container" id="jarContainer">
+                <div class="jar-lid"></div>
+                <div class="jar-neck"></div>
+                <div class="glass-jar">
+                    <div class="jar-glow"></div>
+                    <div class="jar-star" style="top: 55%; left: 22%; color: #ffd700; animation-delay: 0.1s;">★</div>
+                    <div class="jar-star" style="top: 40%; left: 48%; color: #ff69b4; animation-delay: 0.4s;">★</div>
+                    <div class="jar-star" style="top: 65%; left: 70%; color: #87ceeb; animation-delay: 0.7s;">★</div>
+                    <div class="jar-star" style="top: 25%; left: 32%; color: #dda0dd; animation-delay: 1.0s;">★</div>
+                    <div class="jar-star" style="top: 50%; left: 74%; color: #98fb98; animation-delay: 1.3s;">★</div>
+                </div>
+            </div>
+
+            <!-- Compliment Scroll Overlay Modal -->
+            <div class="compliment-overlay" id="complimentOverlay">
+                <div class="compliment-card">
+                    <p id="complimentText">You are absolutely wonderful!</p>
+                    <button id="closeComplimentBtn" class="glow-btn">Keep Smiling 😊</button>
+                </div>
+            </div>
+
+            <button id="toBouquetBtn" class="glow-btn"
+                style="display: none; opacity: 0; transform: translateY(20px); margin: 1.5rem auto 0 auto;">Next
+                Surprise 💐</button>
+            <button id="skipJarBtn" class="glow-btn"
+                style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: none; margin: 1.5rem auto 0 auto; display: inline-block;">Skip Jar ➡️</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PAGE 4: VIRTUAL FLOWER BOUQUET BUILDER
+         ========================================== -->
+    <div id="bouquet-page" class="page">
+        <div data-aos="fade-up" data-aos-duration="1200" style="text-align: center; width: 100%;">
+            <h2 class="glow-title">A Bouquet For You</h2>
+            <p class="subtitle">Pick beautiful flowers from the tray to arrange a lovely bouquet in the vase.</p>
+
+            <div class="bouquet-section">
+                <!-- Interactive Vase -->
+                <div class="vase-container">
+                    <div class="flower-bouquet-area" id="flowerBouquetArea"></div>
+                    <div class="vase-graphic">
+                        <div class="vase-ribbon"></div>
+                    </div>
+                </div>
+
+                <!-- Flowers Tray -->
+                <div class="flower-picker">
+                    <div class="flower-item" data-flower="rose" data-emoji="🌹"
+                        data-msg="Red Rose added: to remind you that you are deeply appreciated.">
+                        <div class="flower-icon">🌹</div>
+                        <div class="flower-name">Red Rose</div>
+                        <div class="flower-meaning">Love & Admiration</div>
+                    </div>
+                    <div class="flower-item" data-flower="sunflower" data-emoji="🌻"
+                        data-msg="Sunflower added: to always bring light and warmth to your days.">
+                        <div class="flower-icon">🌻</div>
+                        <div class="flower-name">Sunflower</div>
+                        <div class="flower-meaning">Warmth & Happiness</div>
+                    </div>
+                    <div class="flower-item" data-flower="tulip" data-emoji="🌷"
+                        data-msg="Tulip added: wishing you a beautiful year full of new opportunities.">
+                        <div class="flower-icon">🌷</div>
+                        <div class="flower-name">Pink Tulip</div>
+                        <div class="flower-meaning">Grace & Beginnings</div>
+                    </div>
+                    <div class="flower-item" data-flower="lily" data-emoji="🌺"
+                        data-msg="Lily added: to fill your life with pure happiness and sweet moments.">
+                        <div class="flower-icon">🌺</div>
+                        <div class="flower-name">Lily</div>
+                        <div class="flower-meaning">Purity & Joy</div>
+                    </div>
+                    <div class="flower-item" data-flower="orchid" data-emoji="🌸"
+                        data-msg="Orchid added: to celebrate your elegant beauty and strength.">
+                        <div class="flower-icon">🌸</div>
+                        <div class="flower-name">Orchid</div>
+                        <div class="flower-meaning">Beauty & Strength</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-feedback" id="flowerFeedback">Click a flower to start building your bouquet!</div>
+            <button id="toGalleryBtn" class="glow-btn"
+                style="display: none; opacity: 0; transform: translateY(20px); margin: 1.5rem auto 0 auto;">Next
+                Surprise 📸</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PAGE 5: POLAROID MEMORY LANE
+         ========================================== -->
+    <div id="gallery-page" class="page">
+        <div data-aos="fade-up" data-aos-duration="1200" style="text-align: center; width: 100%;">
+            <h2 class="glow-title">Memory Lane</h2>
+            <p class="subtitle">A cozy collection of beautiful moments and warm feelings.</p>
+
+            <div class="gallery-grid" style="gap: 3rem;">
+                <div class="circular-photo-container">
+                    <div class="circular-frame">
+                        <img src="img1.jpeg" alt="Salama 1">
+                    </div>
+                    <div class="circular-caption">Beautiful moments ✨</div>
+                </div>
+                <div class="polaroid" style="transform: rotate(4deg);">
+                    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500&q=80"
+                        alt="Warm Lights">
+                    <div class="polaroid-caption">Cozy warmth & joy 🕯️</div>
+                </div>
+                <div class="circular-photo-container">
+                    <div class="circular-frame">
+                        <img src="img2.jpeg" alt="Salama 2">
+                    </div>
+                    <div class="circular-caption">Cherished smiles 🌸</div>
+                </div>
+                <div class="polaroid" style="transform: rotate(-3deg);">
+                    <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=500&q=80" alt="Starry Sky">
+                    <div class="polaroid-caption">Under the same sky ✨</div>
+                </div>
+            </div>
+
+            <button id="toWishBtn" class="glow-btn" style="margin-top: 2rem;">Next Surprise 🌟</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PAGE 6: WRITE A WISH TO THE UNIVERSE
+         ========================================== -->
+    <div id="wish-page" class="page">
+        <div data-aos="fade-up" data-aos-duration="1200" style="text-align: center; width: 100%;">
+            <h2 class="glow-title">Make A Wish</h2>
+            <p class="subtitle">Write down your deepest wish, click send, and watch it rise into the starry night sky.
+            </p>
+
+            <div class="wish-portal">
+                <textarea class="wish-textarea" id="wishText"
+                    placeholder="Type your wish to the universe here, Salama... ✨"></textarea>
+            </div>
+            <button id="sendWishBtn" class="glow-btn" style="margin-top: 1rem;">Send to the Stars ✨</button>
+
+            <p id="wishSuccessMsg" class="subtitle" style="display: none; opacity: 0; margin-top: 2rem; color: var(--accent-star);">Your wish has been sent to the universe! 🌌 Preparing your birthday cake...</p>
+
+            <button id="toCakeBtn" class="glow-btn"
+                style="display: none; opacity: 0; transform: translateY(20px); margin: 2rem auto 0 auto;">Let's
+                Celebrate! 🎂</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PAGE 7: INTERACTIVE CAKE CEREMONY
+         ========================================== -->
+    <div id="cake-page" class="page">
+        <div data-aos="fade-up" data-aos-duration="1200" style="text-align: center; width: 100%;">
+            <h2 id="cakeTitle" class="glow-title">Make a Wish & Blow</h2>
+            <p id="cakeSubtitle" class="subtitle">A sweet cake prepared just for you. Blow into your mic or click the
+                button to blow out the candle!</p>
+
+            <div class="cake-canvas-container">
+                <canvas id="cakeCanvas"></canvas>
+            </div>
+
+            <div style="margin-top: 1.5rem; text-align: center; position: relative; z-index: 10;">
+                <button id="blowCandleBtn" class="glow-btn">💨 Blow Out Candle 💨</button>
+                <br>
+                <div class="mic-pill" id="micPill">
+                    <div class="mic-dot"></div>
+                    <span id="micStatus">Allow mic access to blow physically! 🎤</span>
+                </div>
+            </div>
+
+            <div class="ceremony-message" id="finalMessage" style="display: none;">
+                <h3>Happy Birthday, Salama! 💖</h3>
+                <p>I know you felt a bit down today, but I hope this brought a smile to your face. You make the world
+                    more beautiful. Thank you for existing! 🎉</p>
+                <p style="margin-top: 1.5rem; font-size: 1.25rem; color: var(--accent-star); font-weight: bold; text-shadow: 0 0 10px rgba(255,215,0,0.3); font-style: italic;">
+                    Once again happy birthday I hope you like it, waiting for your response 💖
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         EXTERNAL CDN LIBRARIES & SCRIPTS
+         ========================================== -->
+    <!-- GSAP for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Typed.js for typewriter text effects -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- AOS for scroll reveal animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Canvas Confetti for celebratory bursts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+    <!-- Three.js for 3D renderings -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Main Script Module -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
